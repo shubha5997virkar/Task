@@ -1,8 +1,9 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmit" class="form-container">
+    <h1>Dynamic Form</h1>
     <div v-for="(block, index) in blocks" :key="index">
       <template v-if="block.type === 'text'">
-        <label :for="block.token">{{ block.props.title }}</label>
+            <b>{{ block.props.title }}</b>
         <input
           :type="block.type"
           :placeholder="block.props.placeholder"
@@ -17,10 +18,10 @@
           :id="block.token"
           v-model="data[block.token]"
         />
-        <label :for="block.token">{{ block.props.title }}</label>
+        <b>{{ block.props.title }}</b>
       </template>
       <template v-else-if="block.type === 'date'">
-        <label :for="block.token">{{ block.props.title }}</label>
+        <b>{{ block.props.title }}</b>
         <input
           :type="block.type"
           :placeholder="block.props.placeholder"
@@ -85,7 +86,7 @@ export default {
       
       for (const block of this.blocks) {
         if (
-          block.props.required &&
+          block.props.required && block.type!='date'&&
           (!this.data[block.token] ||
             (block.type === "checkbox" && this.data[block.token] === false))
         ) {
@@ -98,5 +99,41 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.form-container {
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  text-align: center;
+  margin-top:100px;
+
+}
+
+b{
+  margin:8px;
+}
+input[type="text"],
+input[type="date"] {
+  width: 50%;
+  padding:8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 5px;
+  padding:8px;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
 </style>
