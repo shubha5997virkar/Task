@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="container">
+    <div class="card">
     <h1>Click counter - {{ clickCount }}</h1>
 
     <!-- On button click we are sending data from child 
@@ -10,8 +11,10 @@
 
     <!-- Here we are using showInAlert method provided by mixin -->
 
-    <button @click="showInAlert()">Alert</button>
+    <button @click="showInAlert()" class="alert">Alert</button>
   </div>
+  </div>
+  
 </template>
 
 <script>
@@ -36,5 +39,37 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.card{
+  background-color: cadetblue;
+  width:250px;
+  height: 250px;
+  text-align: center;
+  padding:10px
+}
+.container{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+}
+
+button{
+  background-color: blue;
+  width: 100px;
+  height:30px;
+  color:white;
+  border-radius: 5px;
+  margin-top:50px;
+  margin-right:5px
+}
+
+.alert{
+  background-color: red;
+  width: 100px;
+  height:30px;
+  color:white;
+  border-radius: 5px;
+  margin-top:50px;
+  margin-right:5px
+}
 </style>
