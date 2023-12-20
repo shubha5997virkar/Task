@@ -1,7 +1,10 @@
 <template>
   <div>
     <h1>User Component</h1>
-    <input placeholder="Search" v-model="search" />
+   <div class="form"><input placeholder="Search" v-model="search" /></div>
+      
+
+    
 
     <table border="2px solid black">
       <thead>
@@ -118,10 +121,20 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 th {
   background: black;
   color: white;
   height: 40px;
 }
+input{
+  padding:8px;
+  width:20%;
+}
+
+.form{
+  text-align: end;
+  margin-bottom:10px
+}
+
 </style>

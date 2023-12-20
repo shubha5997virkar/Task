@@ -50,7 +50,10 @@ export default {
 .container{
   display: flex;
  flex-direction: row;
-    padding-left: 45%;
+ padding-left: 45%;
+ margin-top:10px;
 
 }
+
+
 </style> 
