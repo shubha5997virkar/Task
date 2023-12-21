@@ -1,43 +1,28 @@
 <template>
+  
   <form @submit.prevent="handleSubmit" class="form-container">
     <h1>Dynamic Form</h1>
     <div v-for="(block, index) in blocks" :key="index">
-      <template v-if="block.type === 'text'">
             <b>{{ block.props.title }}</b>
+      
         <input
           :type="block.type"
           :placeholder="block.props.placeholder"
-          :required="block.props.required"
+          :required="typeof(block.props.required)!='boolean'?data[block.props.required]:block.props.required"
           :id="block.token"
           v-model="data[block.token]"
         />
-      </template>
-      <template v-else-if="block.type === 'checkbox'">
-        <input
-          :type="block.type"
-          :id="block.token"
-          v-model="data[block.token]"
-        />
-        <b>{{ block.props.title }}</b>
-      </template>
-      <template v-else-if="block.type === 'date'">
-        <b>{{ block.props.title }}</b>
-        <input
-          :type="block.type"
-          :placeholder="block.props.placeholder"
-          :required="block.props.required && data['IS_PERSON_MINOR']"
-          :id="block.token"
-          v-model="data[block.token]"
-        />
-      </template>
+
     </div>
     <button type="submit">Submit</button>
   </form>
 </template>
 
 <script>
+
 export default {
   name: "FormComponent",
+  
   data() {
     return {
       data: {}, 
@@ -64,10 +49,11 @@ export default {
           type: "date",
           props: {
             title: "Enter your DOB",
-            required: true,
+            required:'IS_PERSON_MINOR',
             placeholder: "eg. 01/01/2002",
           },
-        },
+          
+        }
       ],
     };
   },
@@ -86,9 +72,8 @@ export default {
       
       for (const block of this.blocks) {
         if (
-          block.props.required && block.type!='date'&&
-          (!this.data[block.token] ||
-            (block.type === "checkbox" && this.data[block.token] === false))
+      (typeof(block.props.required) != 'boolean'? this.data[block.props.required]:block.props.required) &&
+          !this.data[block.token]
         ) {
           return false; 
         }
